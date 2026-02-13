@@ -8,6 +8,10 @@
       "@/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
+    // 新增：适配 Node 模块解析，避免第三方类型包解析失败
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true, // 跳过第三方库类型检查，避免冲突报错
     "types": [
       "@dcloudio/types", // uni-app API 类型
       "miniprogram-api-typings", // 原生微信小程序类型
@@ -17,7 +21,8 @@
   },
   "vueCompilerOptions": {
     // experimentalRuntimeMode 已废弃，请升级 Vue - Official 插件至最新版本
-    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
+    "plugins": ["@uni-helper/uni-app-types/volar-plugin"],
+    
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

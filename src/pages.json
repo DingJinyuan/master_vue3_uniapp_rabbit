@@ -3,8 +3,21 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      // uni-ui 规则如下配置  // [!code ++]
-      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue" // [!code ++]
+//       // uni-ui 规则如下配置  // [!code ++]
+//       (1) 键：^uni-(.*)（正则表达式）
+// ^：匹配字符串开头；
+// uni-：匹配以 uni- 开头的组件名（比如 uni-card、uni-list、uni-button）；
+// (.*)：正则捕获组，匹配 uni- 后面的所有字符（比如 card、list、button），并把这部分内容存为 $1（后续路径中会用到）。
+// (2) 值：@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue（路径模板）
+// @dcloudio/uni-ui：uni-ui 组件库的 npm 包路径（前提是你已经安装了 @dcloudio/uni-ui）；
+// uni-$1：$1 对应前面正则捕获的内容（比如组件名是 uni-card，$1 就是 card，所以这里变成 uni-card）；
+// 完整路径示例：
+// 当你用 <uni-card> 时，uni-app 会自动匹配到：@dcloudio/uni-ui/lib/uni-card/uni-card.vue；
+// 当你用 <uni-list> 时，自动匹配到：@dcloudio/uni-ui/lib/uni-list/uni-list.vue。
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue", // [!code ++]
+      //同理自定义导入
+      //// 以 Xtx 开头的组件，在 components 目录中查找
+      "^Xtx(.*)":"@/components/Xtx$1.vue"
     }
   },
   "pages": [
@@ -12,6 +25,8 @@
     {
       "path": "pages/index/index",
       "style": {
+        "navigationStyle": "custom",//设为自定义隐藏起来
+        "navigationBarTextStyle": "white",
         "navigationBarTitleText": "首页"
       }
     },
