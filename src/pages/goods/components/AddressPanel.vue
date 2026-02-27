@@ -1,6 +1,10 @@
 // AddressPanel.vue
 <script setup lang="ts">
 // 子调父----组件通讯：通过子调父，关闭弹出层。
+// 子调父核心：
+// 子组件用 defineEmits 声明要触发的 close 事件；
+// 点击关闭按钮时，调用 emit('close') 触发事件；
+// 父组件通过 @close 监听这个事件，收到后调用 popup?.close() 关闭弹窗
 const emit = defineEmits<{
   (event: 'close'): void
 }>()

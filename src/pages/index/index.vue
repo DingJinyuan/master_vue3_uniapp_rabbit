@@ -11,6 +11,7 @@ import HotPanel from './components/HotPanel.vue'
 import type { XtxGuessInstance } from '@/types/component'
 //import XtxGuess from '@/components/XtxGuess.vue'
 import PageSkeleton from './components/PageSkeleton.vue'
+import { useGuessList } from '@/composables'
 //获取轮播数据
 const bannerList = ref<BannerItem[]>([])
 const getHomeBannerData = async () => {
@@ -42,19 +43,24 @@ onLoad(async () => {
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()])
   isLoading.value = false
 })
-//获取猜你喜欢组件
-const guessRef = ref<XtxGuessInstance>()
-//滚动触底-自动触发
-const onScrolltolower = () => {
-  guessRef.value?.getMore()
-  //console.log(1)
-}
+// //获取猜你喜欢组件
+// const guessRef = ref<XtxGuessInstance>()
+// //滚动触底-自动触发
+// const onScrolltolower = () => {
+//   guessRef.value?.getMore()
+//   //console.log(1)
+// }==>组合式函数封装
+// 猜你喜欢组合式函数
+const { guessRef, onScrolltolower } = useGuessList() // [!code ++]
 const isTriggered = ref(false)
+
 //自定义下拉刷新被触发
 const onRefresherrefresh = async () => {
   //开始动画标记
   isTriggered.value = true
   // await getHomeBannerData(), await getHomeCategoryData(), await getHomeHotData()
+  // 重置猜你喜欢组件数据
+  guessRef.value?.resetData() // 加载数据
   //同时请求
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()])
   guessRef.value?.getMore()

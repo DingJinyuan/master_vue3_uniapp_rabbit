@@ -33,6 +33,8 @@
 		{
 			"path": "pages/my/my",
 			"style": {
+				"navigationStyle": "custom", //设为自定义隐藏起来
+				"navigationBarTextStyle": "white",
 				"navigationBarTitleText": "我的"
 			}
 		},
@@ -105,5 +107,51 @@
 				"selectedIconPath": "static/tabs/user_selected.png"
 			}
 		]
+	}, // 分包加载规则
+	"subPackages": [
+		{
+			// 子包的根目录
+			"root": "pagesMember",
+			"pages": [
+				{ // 页面路径和窗口表现
+					"path": "settings/settings",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationBarTitleText": "个人信息",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				},
+				{
+					"path": "addressForm/addressForm",
+					"style": {
+						"navigationBarTitleText": ""
+					}
+				}
+			]
+		}
+	],
+	// 分包预下载规则
+	"preloadRule": {
+		// 触发预下载的页面路径：当用户进入「我的页面（pages/my/my）」时，执行预下载
+		"pages/my/my": {
+			// 网络规则：在什么网络环境下预下载
+			"network": "all",
+			// 要预下载的分包名列表：预下载名为「pagesMember」的分包
+			"packages": [
+				"pagesMember"
+			]
+		}
 	}
 }
