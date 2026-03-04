@@ -260,9 +260,12 @@ const onBuyNow = (ev: SkuPopupEvent) => {
         <text class="icon-handset"></text>客服
       </button>
       <!-- 专门用于跳转到小程序的 TabBar 页面（底部导航栏页面） -->
+
+      <!-- #ifdef VUE3 -->
       <navigator class="icons-button" url="/pages/cart/cart2" open-type="navigate">
         <text class="icon-cart"></text>购物车
       </navigator>
+      <!-- #endif -->
     </view>
     <view class="buttons">
       <view class="addcart" @tap="openSkuPopup(SkuMode.Cart)"> 加入购物车 </view>

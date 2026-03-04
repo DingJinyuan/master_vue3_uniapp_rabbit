@@ -92,7 +92,9 @@ const onSubmit = async () => {
   <view class="viewport">
     <!-- 导航栏 -->
     <view class="navbar" :style="{ paddingTop: safeAreaInsets?.top + 'px' }">
+      <!-- #ifdef VUE3 -->
       <navigator open-type="navigateBack" class="back icon-left" hover-class="none"></navigator>
+      <!-- #endif -->
       <view class="title">个人信息</view>
     </view>
     <!-- 头像 -->
